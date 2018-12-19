@@ -13,6 +13,24 @@ gem 'bcrypt',       '3.1.12'
 gem 'faker',        '1.7.3'
 gem 'bootstrap-will_paginate', '1.0.0'
 
+gem 'rails_admin'
+gem 'pry-rails'
+gem 'carrierwave'
+gem 'paperclip'
+gem 'roo'
+gem 'roo-xls'
+gem 'paper_trail'
+gem 'rubyzip', '~> 1.1.0'
+gem 'axlsx', '2.1.0.pre'
+gem 'axlsx_rails'
+gem 'rails-i18n'
+
+
+# bundle exec rake doc:rails generates the API under doc/api.
+gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'simplecov', :require => false, :group => :test
+
+
 group :development, :test do
   gem 'sqlite3', '1.3.13'
   gem 'byebug',  '9.0.6', platform: :mri

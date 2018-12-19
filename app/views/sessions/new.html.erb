@@ -1,24 +1,45 @@
-<% provide(:title, "Log in") %>
-<h1>Log in</h1>
-
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(:session, url: login_path) do |f| %>
+  <div class="col-sm-offset-4 col-sm-4">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h4><span class="glyphicon glyphicon-lock"></span> 登录</h4>
+      </div>
+      <div class="panel-body">
 
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
+        <%= form_for(:session, url: sessions_login_path, method: :post, html: {role: 'form'}) do |f| %>
+            <div class="form-group">
+              <%= f.label :email, "账号密码登陆" %>
+              <div class="input-group">
+                <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
+                <%= f.email_field :email, class: 'form-control', placeholder: "输入邮箱" %>
+              </div>
+            </div>
 
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
-      
-      <%= f.label :remember_me, class: "checkbox inline" do %>
-        <%= f.check_box :remember_me %>
-        <span>Remember me on this computer</span>
-      <% end %>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
+                <%= f.password_field :password, class: 'form-control', placeholder: "输入密码" %>
+              </div>
+            </div>
 
-      <%= f.submit "Log in", class: "btn btn-primary" %>
-    <% end %>
+            <div class="checkbox">
+              <label><%= f.check_box :remember_me %>记住我</label>
+            </div>
 
-    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+            <%= button_tag(type: "submit", class: "btn btn-success btn-block") do %>
+                <span class="glyphicon glyphicon-off"></span>登陆
+            <% end %>
+
+        <% end %>
+      </div>
+
+      <div class="panel-footer">
+        <p>没有账号?
+          <%= link_to "注册", new_user_path %>
+        </p>
+      </div>
+    </div>
   </div>
 </div>
+
+
