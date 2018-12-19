@@ -5,7 +5,14 @@
 
     </div>
     <div class="col-sm-10">
+      
+      <%= form_tag(list_courses_path, :method => "get", id: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "搜索课程" %>
+      <%= submit_tag "搜索" %>
+      <% end %>
+      
       <div class="panel panel-primary">
+        
         <div class="panel-heading">
           <h3 class="panel-title">选修课程</h3>
         </div>
@@ -28,7 +35,7 @@
             </thead>
             <tbody>
 
-            <% @courses.each do |course| %>
+            <% @course.each do |course| %>
                 <tr>
 
                   <td><%= course.course_code %></td>

@@ -60,14 +60,14 @@ class CoursesController < ApplicationController
   def list
     #-------QiaoCode--------
     @courses = Course.where(:open=>true).paginate(page: params[:page], per_page: 4)
-    @course = @courses-current_user.courses
-    tmp=[]
-    @course.each do |course|
-      if course.open==true
-        tmp<<course
-      end
+    @course = @current_user.courses
+
+    # Yue's search code
+    if params[:search]
+      @course = Course.search(params[:search]).order("created_at DESC")
+    else
+      @course = Course.all.order('created_at DESC')
     end
-    @course=tmp
   end
 
   def select
