@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  get 'notices/new'
+
+  get 'notices/create'
+
+  get 'notices/edit'
+
+  get 'notices/update'
+
+  get 'notices/destroy'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -26,7 +36,15 @@ Rails.application.routes.draw do
     end
     collection do
       get :list
+      post :list
     end
+    
+    # collection do
+    #   get :my_course_list
+    #   post :my_course_list
+    #   post :save_discuss
+    #   post :select
+    # end
   end
 
   resources :grades, only: [:index, :update]

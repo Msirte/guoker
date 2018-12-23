@@ -1,4 +1,5 @@
 class CoursesController < ApplicationController
+  include CoursesHelper
 
   before_action :student_logged_in, only: [:select, :quit, :list]
   before_action :teacher_logged_in, only: [:new, :create, :edit, :destroy, :update, :open, :close]#add open by qiao
@@ -63,11 +64,24 @@ class CoursesController < ApplicationController
     @course = @current_user.courses
 
     # Yue's search code
-    if params[:search]
-      @course = Course.search(params[:search]).order("created_at DESC")
-    else
-      @course = Course.all.order('created_at DESC')
+    if request.get?
+      if params[:search]
+        @course = Course.search(params[:search]).order("created_at DESC")
+      else
+        @course = Course.all.order('created_at DESC')
+      end
     end
+
+    @course_to_choose = @course
+    @course_time_table = get_course_table(@course_to_choose)
+    @course_time = get_course_info(@course_to_choose, 'course_time')
+    @course_exam_type = get_course_info(@course_to_choose, 'exam_type')
+    
+    if request.post?
+      @course = course_filter_by_condition(@course_to_choose, params, ['course_time', 'exam_type'])
+    end
+    
+    @current_user.courses = @course
   end
 
   def select
