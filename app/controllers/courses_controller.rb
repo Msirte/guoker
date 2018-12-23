@@ -105,7 +105,13 @@ class CoursesController < ApplicationController
     @course=current_user.teaching_courses.paginate(page: params[:page], per_page: 4) if teacher_logged_in?
     @course=current_user.courses.paginate(page: params[:page], per_page: 4) if student_logged_in?
   end
-
+  
+  def timetable
+    @course=current_user.courses
+    @current_user_course=current_user.courses
+    @user=current_user
+    @course_time_table = get_current_curriculum_table(@course,@user)#当前课表
+  end
 
   private
 

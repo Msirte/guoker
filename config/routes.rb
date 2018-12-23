@@ -33,6 +33,7 @@ Rails.application.routes.draw do
       get :quit
       get :open
       get :close
+      get :timetable
     end
     collection do
       get :list
