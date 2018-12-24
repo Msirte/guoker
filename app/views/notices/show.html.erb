@@ -1,0 +1,13 @@
+<div class="col-sm-10 col-md-offset-1">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">通知详情</h3>
+    </div>
+  
+    <div class="panel-body">
+      <h3><%= @notice.title %></h3>
+      <p><%= @notice.department %> : <%= @notice.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></p>
+      <p><%= @notice.text %></p>
+    </div>
+  </div>
+</div>

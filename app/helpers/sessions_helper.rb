@@ -26,13 +26,15 @@ module SessionsHelper
     session.delete(:user_id)
     @current_visit = nil
   end
-
-
+  
+  def search_record
+    session[:search] = params[:search]
+  end
 
   # Returns the user corresponding to the remember token cookie.
   def current_user
     if session[:user_id]
-      @current_user||= User.find_by(id: session[:user_id])
+      @current_user ||= User.find_by(id: session[:user_id])
     elsif cookies.signed[:user_id]
       user = User.find_by(id: cookies.signed[:user_id])
       if user && user.user_authenticated?(:remember, cookies[:remember_token])
@@ -41,7 +43,7 @@ module SessionsHelper
       end
     end
   end
-
+  
   def remember_user(user)
     user.user_remember
     # Because it places the id as plain text, this method exposes the form of the application’s cookies

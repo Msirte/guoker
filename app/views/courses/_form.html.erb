@@ -16,18 +16,18 @@
     <tbody>
 
     <% @course.each do |course| %>
-        <tr>
-          <td><%= course.course_code %></td>
-          <td><%= course.name %></td>
-          <td><%= course.credit %></td>
-          <td><%= course.limit_num %></td>
-          <td><%= course.student_num %></td>
-          <td><%= course.course_type %></td>
-          <td><%= course.teaching_type %></td>
-          <td><%= course.exam_type %></td>
-          <td><%= course.teacher.name %></td>
-          <td><%= link_to "加入课程", select_course_path(course), class: 'btn-sm btn-info' %></td>
-        </tr>
+      <tr>
+        <td><%= course.course_code %></td>
+        <td><%= course.name %></td>
+        <td><%= course.credit %></td>
+        <td><%= course.limit_num %></td>
+        <td><%= course.student_num %></td>
+        <td><%= course.course_type %></td>
+        <td><%= course.teaching_type %></td>
+        <td><%= course.exam_type %></td>
+        <td><%= course.teacher.name %></td>
+        <td><%= link_to "加入课程", select_course_path(course), class: 'btn-sm btn-info' %></td>
+      </tr>
     <% end %>
     </tbody>
   </table>

@@ -64,13 +64,14 @@ class CoursesController < ApplicationController
     @course = @current_user.courses
 
     # Yue's search code
-    if request.get?
-      if params[:search]
-        @course = Course.search(params[:search]).order("created_at DESC")
-      else
-        @course = Course.all.order('created_at DESC')
-      end
+    if params[:search]
+      @course = Course.search(params[:search]).order("created_at DESC")
+    elsif session[:search]
+      @course = Course.search(session[:search]).order("created_at DESC")
+    else
+      @course = Course.all.order('created_at DESC')
     end
+    search_record
 
     @course_to_choose = @course
     @course_time_table = get_course_table(@course_to_choose)
