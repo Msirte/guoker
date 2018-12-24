@@ -1,18 +1,12 @@
 Rails.application.routes.draw do
-  get 'notices/new'
 
-  get 'notices/create'
-
-  get 'notices/edit'
-
-  get 'notices/update'
-
-  get 'notices/destroy'
   get 'notices/index'
   get 'notices/show'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   root 'homes#index'
+
+  resources :notices
 
   resources :courses do
     member do

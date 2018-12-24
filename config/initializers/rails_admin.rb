@@ -1,14 +1,13 @@
 RailsAdmin.config do |config|
   config.parent_controller = "::ApplicationController"
 
-
   # config.main_app_name = ["Cool app", "BackOffice"]
   # or something more dynamic
   config.main_app_name = Proc.new { |controller| ["CourseSelect", "控制面板"] }
 
   # config.authorize_with :cancan, AdminAbility
 
-  config.included_models = ['User','Course','Grade']
+  config.included_models = ['User','Course','Grade', 'Notice']
   
   # == Authenticate ==
   config.authorize_with do

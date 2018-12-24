@@ -42,8 +42,12 @@ ActiveRecord::Schema.define(version: 20181220073150) do
   end
 
   create_table "notices", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "title"
+    t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notices_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
