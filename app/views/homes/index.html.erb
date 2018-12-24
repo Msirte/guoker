@@ -1,0 +1,31 @@
+<div class="row bg" >
+<div class="container-fluid" >
+  <div class="row" >
+    <div class="col-md-6 col-md-offset-1">
+      <div class="panel panel-primary">
+        <h1>最新通知</h1>
+        <p class="lead">
+          <div class="panel-body" style="min-height: 200px" >
+          <table class="table table-striped table-hover">
+          <% @notice.each do |notice| %>
+            <div>
+            <span class="glyphicon glyphicon-hand-right">
+              <%= link_to notice.title, notice_url(notice) %>
+            </span>
+              <span class="glyphicon glyphicon-calendar" style="float: right">
+                <%= notice.created_at.strftime('%Y-%m-%d %H:%M') %>
+              </span>
+            </div>
+            <br>
+          <% end %>
+          </table>
+          </div>
+        </p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <%= render '/sessions/login' unless current_user %>
+    </div>
+  </div>
+</div>
+</div>

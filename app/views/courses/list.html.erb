@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-2">
+      <%= render "shared/sidenav" %>
+    </div>
+    <div class="col-sm-10">
+      <div class="search-box">
+        <%= form_tag(list_courses_path, :method => "get", id: "search-form") do %>
+        <%= text_field_tag :search, params[:search], placeholder: "搜索课程" %>
+        <%= submit_tag "搜索" %>
+        <% end %>
+      </div>
+      
+      <div class="row">
+        <%= form_tag(list_courses_path, :method => "post") do %>
+            <div class="form-group">
+              <%= render 'courses/search_course_select_form', info: @course_time, submit_name: "course_time", name: "上课时间" %>
+              <%= render 'courses/search_course_select_form', info: @course_exam_type, submit_name: "exam_type", name: "考试方式" %>
+            </div>
+            <button type="submit" class="btn btn_new">筛选</button>
+        <% end %>
+      </div>
+      
+      <div class="panel panel-primary">
+        
+        <div class="panel-heading">
+          <h3 class="panel-title">选修课程</h3>
+        </div>
+        
+        <%= render 'form' %>
+        
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="container-fluid" >
+  <div class="row" >
+    <div class="col-sm-10 col-md-offset-1">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">通知</h3>
+        </div>
+
+        <div class="panel-body" style="min-height: 450px" >
+          <div class="table-responsive">
+            <% @notice.each do |notice| %>
+              <div>
+                <span class="glyphicon glyphicon-hand-right">
+                  <%= link_to notice.title, notice_url(notice) %>
+                </span>
+                <span class="glyphicon glyphicon-calendar" style="float: right"><%= notice.created_at.strftime('%Y-%m-%d %H:%M') %></span>
+                <span class="glyphicon glyphicon-user" style="float: right;margin-right:10px;">国科大教务部</span>
+  
+              </div>
+              <br>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
