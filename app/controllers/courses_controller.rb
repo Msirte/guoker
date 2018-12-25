@@ -70,7 +70,7 @@ class CoursesController < ApplicationController
   #-------------------------for students----------------------
 
   def list
-    #-------QiaoCode--------
+
     @courses = Course.where(:open=>true).paginate(page: params[:page], per_page: 4)
     @course = @current_user.courses
 
