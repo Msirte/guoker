@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   get 'notices/index'
   get 'notices/show'
+  get 'grades/export' => "grades#export"
+  post 'grades/import' => "grades#import"
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   root 'homes#index'
@@ -29,7 +31,7 @@ Rails.application.routes.draw do
     # end
   end
 
-  resources :grades, only: [:index, :update]
+  resources :grades, only: [:index, :update, :export, :import]
   resources :users
 
   get 'sessions/login' => 'sessions#new'
