@@ -1,0 +1,105 @@
+<div id="side_credits_statistics" class="side_credits_statistics col-sm-5">
+  <div class="sideDiv_content">
+    <div class="panel panel-primary filterable">
+      <div class="panel-heading">
+        <%= current_user.name %> 学分统计表
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered" id="credits_statistics" style="text-align: center">
+          <thead>
+          <td>本学年应选学分</td>
+          <td>本学期已选学分</td>
+          </thead>
+          <tbody>
+              <tr>
+                  <td>38</td>
+                  <%  credit = 0 %>
+                  <% @current_user_course.each do |course| %>
+                      <%  credit =  credit + course.credit.split('/').at(1).to_i  %>
+                  <% end %>
+                  <% credit_all = credit %>
+                  <td><%= credit_all %></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="side_credits_statistics_ctrlBlock">
+    <div id="credits_statistics_slide_in_button" data-placement="left" class="tooltip-show" data-toggle="tooltip" title="学分统计表"></div>
+  </div>
+</div>
+
+<script>
+    function hidden_border() {
+        var m = 2, n = 2;
+        for (var j = 1; j <= n; j++) {
+            for (var i = m; i >= 0; i--) {
+                var cur = $('.row' + i + '.col' + j);
+                if (i - 1 >= 0 && cur.attr('alt') != '') {
+                    var pre_row = $('.row' + (i - 1) + '.col' + j);
+                    if (pre_row.attr('alt') == cur.attr('alt')) {
+                        pre_row.css("border-bottom", "none");
+                        cur.css("border-top", "none");
+                        cur.text("");
+                        i--;
+                        if (i - 1 <= m) {
+                            var p_pre_row = $('.row' + (i - 1) + '.col' + j);
+                            if (p_pre_row.attr('alt') == pre_row.attr('alt')) {
+                                i--;
+                                p_pre_row.css("border-bottom", "none");
+                                pre_row.css("border-top", "none");
+                                p_pre_row.text("");
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+    $(hidden_border());
+
+    $(document).ready(
+        function () {
+            var sideDiv_right = $("#side_credits_statistics").width() - 40 + (document.body.clientHeight > $(window).height() ? 16 : 25);
+            var speed = 300;
+
+            $("#side_credits_statistics").css("right", -sideDiv_right);
+            $("#side_credits_statistics").css("top", window.pageYOffset + 200 + 'px');
+
+            var cnt = 0;
+
+            $("#credits_statistics_slide_in_button").click(function () {
+                if (!cnt) {
+                    $("#side_credits_statistics")
+                        .animate({
+                                right: '0px'
+                            },
+                            speed,
+                            function () {
+                                document.getElementById("credits_statistics_slide_in_button").style.transform = "rotate(180deg)";
+                                cnt = 1;
+                            });
+                } else {
+                    $("#side_credits_statistics")
+                        .animate({
+                                right: -sideDiv_right +'px'
+                            },
+                            speed,
+                            function () {
+                                document.getElementById("credits_statistics_slide_in_button").style.transform = "rotate(0deg)";
+                                cnt = 0;
+                            });
+                }
+            });
+
+        }).scroll(function () {
+        $("#side_credits_statistics").css("top", window.pageYOffset + 300 + 'px');
+    });
+    $(function () {
+        $('.tooltip-show').tooltip('show');
+    });
+
+</script>
