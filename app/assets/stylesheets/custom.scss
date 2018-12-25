@@ -39,11 +39,14 @@ $gray-medium-light: #eaeaea;
 /* universal */
 
 body {
+  overflow-x: hidden;
   padding-top: 60px;
+
 }
 
 section {
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 textarea {
@@ -240,7 +243,7 @@ body{
 }
 
 #side_credits_statistics {
-  height: 483px;
+  height: 120px;
   overflow: hidden;
   position: absolute;
   z-index: 100;
@@ -280,14 +283,6 @@ body{
   background: image_url("/images/side_course_table_button_hover.png") repeat scroll left top rgba(0, 0, 0, 0);
 }
 
-.alert_bar {
-  background-color: #97c65e;
-  color: white;
-}
-
-.padding {
-  padding-bottom: 24px;
-}
 
 
 
