@@ -10,6 +10,10 @@
         </div>
 
         <div class="panel-body" style="min-height: 450px">
+          <% if student_logged_in? %>
+            <%= link_to "导出", grades_save_url(:format => 'xls'), :class => "btn" %>
+          <% end %>
+          
           <% if teacher_logged_in? %>
               <div class="row">
                 <div class="col-sm-12" style="padding-bottom: 26px">
@@ -63,6 +67,7 @@
             <% end %>
             </tbody>
           </table>
+          <%= will_paginate @grades %>
         </div>
       </div>
     </div>

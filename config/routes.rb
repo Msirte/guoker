@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'notices/show'
   get 'grades/export' => "grades#export"
   post 'grades/import' => "grades#import"
+  get 'grades/save' => "grades#save"
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   root 'homes#index'

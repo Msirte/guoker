@@ -1,5 +1,4 @@
 class GradesController < ApplicationController
-
   before_action :teacher_logged_in, only: [:update, :export, :import]
 
   def update
@@ -21,6 +20,25 @@ class GradesController < ApplicationController
       @grades=current_user.grades.paginate(page: params[:page], per_page: 4)
     else
       redirect_to root_path, flash: {:warning=>"请先登陆"}
+    end
+  end
+  
+  def save
+    @grades=current_user.grades
+    respond_to do |format|
+      format.xls {
+        require 'tempfile'
+        temp_file = Tempfile.new("#{current_user.id.to_s+'_grades'}.xls")
+        workbook = Spreadsheet::Workbook.new
+        worksheet = workbook.create_worksheet
+        worksheet.row(0).concat %w{课程 成绩}
+        @grades.each_with_index do |c, i|
+          worksheet.row(i+1).push c.course.name, c.grade
+        end
+        workbook.write temp_file
+        send_file temp_file, :type => "application/vnd.ms-excel", :filename => "#{current_user.id.to_s}.xls", :stream => false
+        # temp_file.rewind
+      }
     end
   end
   
@@ -80,6 +98,13 @@ class GradesController < ApplicationController
   # Confirms a teacher logged-in user.
   def teacher_logged_in
     unless teacher_logged_in?
+      redirect_to root_url, flash: {danger: '请登陆'}
+    end
+  end
+
+  # Confirms a student logged-in user.
+  def student_logged_in
+    unless student_logged_in?
       redirect_to root_url, flash: {danger: '请登陆'}
     end
   end

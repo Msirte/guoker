@@ -93,7 +93,6 @@ class CoursesController < ApplicationController
       @course = course_filter_by_condition(@course_to_choose, params, ['course_time', 'exam_type'])
     end
     
-    @current_user.courses = @course
   end
 
   def select
