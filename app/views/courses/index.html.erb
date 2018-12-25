@@ -37,6 +37,11 @@
                   <td><%= course.teacher&.name %></td>
 
                   <% if teacher_logged_in? %>
+                      <td>
+                        <% if teacher_logged_in? %>
+                            <%= link_to "学生信息", student_list_course_url(course) %>
+                        <% end %>
+                      </td>
                       <td><%= link_to "编辑", edit_course_url(course), class: 'btn btn-xs btn-info' %></td>
                       <% if course.open? %>
                           <td><%= link_to "关闭", close_course_url(course), class: 'btn btn-xs btn-info' %></td>

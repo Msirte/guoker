@@ -2,7 +2,7 @@ class CoursesController < ApplicationController
   include CoursesHelper
 
   before_action :student_logged_in, only: [:select, :quit, :list]
-  before_action :teacher_logged_in, only: [:new, :create, :edit, :destroy, :update, :open, :close]#add open by qiao
+  before_action :teacher_logged_in, only: [:new, :create, :edit, :destroy, :update, :open, :close, :student_list]#add open by qiao
   before_action :logged_in, only: :index
 
   #-------------------------for teachers----------------------
@@ -56,6 +56,17 @@ class CoursesController < ApplicationController
     redirect_to courses_path, flash: flash
   end
 
+  def student_list
+    @course = Course.find_by_id(params[:id])
+    @user = @course.users
+    @user_department = {}
+    @user.each do |user|
+      if !@user_department.has_key?(user.department)
+        @user_department[user.department] = 0
+      end
+      @user_department[user.department] += 1
+    end
+  end
   #-------------------------for students----------------------
 
   def list
@@ -82,7 +93,6 @@ class CoursesController < ApplicationController
       @course = course_filter_by_condition(@course_to_choose, params, ['course_time', 'exam_type'])
     end
     
-    @current_user.courses = @course
   end
 
   def select

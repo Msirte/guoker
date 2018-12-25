@@ -10,8 +10,11 @@ class Course < ActiveRecord::Base
 
   # Yue's search code
   def self.search(search)
-    where("name LIKE ?", "%#{search}%") 
-  #  where("course_time LIKE ?", "%#{search}%")
+    if Rails.env.development?
+      where("name LIKE ?", "%#{search}%") 
+    elsif Rails.env.production?
+      where("name ILIKE ?", "%#{search}%") 
+    end
   end
 
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181220073150) do
+ActiveRecord::Schema.define(version: 20181225024857) do
 
   create_table "courses", force: :cascade do |t|
     t.string "name"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20181220073150) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "open", default: false
+    t.text "outline", default: "本课程暂无大纲"
     t.index ["teacher_id"], name: "index_courses_on_teacher_id"
   end
 

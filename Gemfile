@@ -24,6 +24,7 @@ gem 'rubyzip', '~> 1.1.0'
 gem 'axlsx', '2.1.0.pre'
 gem 'axlsx_rails'
 gem 'rails-i18n'
+gem 'spreadsheet'
 
 
 # bundle exec rake doc:rails generates the API under doc/api.
