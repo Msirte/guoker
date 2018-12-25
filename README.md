@@ -1,4 +1,4 @@
-# CourseSelect [![Build Status](https://github.com/Msirte/guoker)](https://github.com/Msirte/guoker)
+# CourseSelect [![Build Status](https://travis-ci.org/Msirte/guoker)](https://github.com/Msirte/guoker)
 
 ### [中文教程1](http://blog.csdn.net/ppp8300885/article/details/52594839) [中文教程2](http://blog.csdn.net/ppp8300885/article/details/52601560) [中文教程3](http://blog.csdn.net/ppp8300885/article/details/52669749) [Wiki](https://github.com/PENGZhaoqing/CourseSelect/wiki)
 
