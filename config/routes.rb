@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   get 'notices/index'
   get 'notices/show'
+  get 'grades/export' => "grades#export"
+  post 'grades/import' => "grades#import"
+  get 'grades/save' => "grades#save"
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   root 'homes#index'
@@ -15,6 +18,7 @@ Rails.application.routes.draw do
       get :open
       get :close
       get :timetable
+      get :student_list
     end
     collection do
       get :list
@@ -29,7 +33,7 @@ Rails.application.routes.draw do
     # end
   end
 
-  resources :grades, only: [:index, :update]
+  resources :grades, only: [:index, :update, :export, :import]
   resources :users
 
   get 'sessions/login' => 'sessions#new'
