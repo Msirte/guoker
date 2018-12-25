@@ -78,6 +78,11 @@ class CoursesController < ApplicationController
     @course_time = get_course_info(@course_to_choose, 'course_time')
     @course_exam_type = get_course_info(@course_to_choose, 'exam_type')
     
+    @course=current_user.courses
+    @current_user_course=current_user.courses
+    @user=current_user
+    @course_credit = get_course_info(@course_to_choose, 'credit')
+    
     if request.post?
       @course = course_filter_by_condition(@course_to_choose, params, ['course_time', 'exam_type'])
     end
