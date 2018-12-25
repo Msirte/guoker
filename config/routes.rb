@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       get :open
       get :close
       get :timetable
+      get :student_list
     end
     collection do
       get :list
