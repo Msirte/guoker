@@ -26,7 +26,6 @@ gem 'axlsx_rails'
 gem 'rails-i18n'
 gem 'spreadsheet'
 
-ruby '2.4.5'
 
 
 # bundle exec rake doc:rails generates the API under doc/api.
