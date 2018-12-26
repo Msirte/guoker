@@ -62,3 +62,6 @@
     </div>
   </div>
 </div>
+<% if logged_in? %>
+    <%= render 'courses/credits_statistics' %>
+<% end %>
