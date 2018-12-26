@@ -109,7 +109,7 @@ class CoursesController < ApplicationController
       fails_course = []
       success_course = []
       course = @course
-      if course.grades.length < course.limit_num and Grade.create(:user_id => current_user.id, :course_id => course.id)
+      if (course.limit_num.nil? or course.grades.length < course.limit_num) and Grade.create(:user_id => current_user.id, :course_id => course.id)
         success_course << course.name
       else
         fails_course << course.name
