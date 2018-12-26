@@ -2,6 +2,7 @@
   <label for="name" class="col-sm-4 control-label"><%= name %></label>
   <div class="col-sm-8">
     <select class="form-control" name="<%= submit_name %>">
+      <option value=""><%= submit_name == 'semester' ? '所有学期' : ' ' %></option>
       <% info.each do |info| %>
         <% if info != @current_semester %>
             <option value="<%= info %>"><%= submit_name == 'semester' ? semester_to_season(info) : info %></option>
