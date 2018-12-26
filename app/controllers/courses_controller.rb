@@ -13,6 +13,7 @@ class CoursesController < ApplicationController
 
   def create
     @course = Course.new(course_params)
+    @course.teacher = current_user
     if @course.save
       current_user.teaching_courses<<@course
       redirect_to courses_path, flash: {success: "新课程申请成功"}
