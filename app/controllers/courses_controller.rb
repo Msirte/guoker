@@ -158,6 +158,12 @@ class CoursesController < ApplicationController
     @user=current_user
     @course_time_table = get_current_curriculum_table(@course,@user)#当前课表
   end
+  
+  def course_outline
+    puts("this is course_outline")
+    @course = Course.find_by_id(params[:id])
+    @coursetmp = current_user.teaching_courses if teacher_logged_in?
+  end
 
   private
 

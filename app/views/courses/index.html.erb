@@ -31,7 +31,7 @@
                 <tr>
 
                   <td><%= course.course_code %></td>
-                  <td><%= course.name %></td>
+                  <td><%= link_to course.name, course_outline_course_url(course) %></td>
                   <td><%= course.credit %></td>
                   <td><%= course.exam_type %></td>
                   <td><%= course.teacher&.name %></td>

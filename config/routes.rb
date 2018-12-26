@@ -19,18 +19,12 @@ Rails.application.routes.draw do
       get :close
       get :timetable
       get :student_list
+      get :course_outline
     end
     collection do
       get :list
       post :list
     end
-    
-    # collection do
-    #   get :my_course_list
-    #   post :my_course_list
-    #   post :save_discuss
-    #   post :select
-    # end
   end
 
   resources :grades, only: [:index, :update, :export, :import]
