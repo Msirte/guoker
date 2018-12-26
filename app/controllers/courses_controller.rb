@@ -102,49 +102,31 @@ class CoursesController < ApplicationController
 
   def select
     @course=Course.find_by_id(params[:id])
-=begin    
-    if course_conflict?(get_current_course(), @course)
-      flash={:warning => "课程冲突"}
-    end
 
-    if @in_course_select_time # 选课时间判断
-      ids = params[:course_to_choose]
-      if ids
-        @course = Course.find(ids)
-        if course_conflict?(get_current_semester_course(), @course)
-          flash={:warning => "课程冲突"}
-        else
-          fails_course = []
-          success_course = []
-          @course.each do |course|
-            if course.grades.length < course.limit_num and Grade.create(:user_id => current_user.id, :course_id => course.id)
-              success_course << course.name
-            else
-              fails_course << course.name
-            end
-          end
-          if success_course.length !=0
-            flash = {:success => ("成功选择课程:  " + success_course.join(','))}
-          end
-          if fails_course.length !=0
-            waring_info = fails_course.join(',') +'  人数已满'
-            if flash != nil
-              flash[:warning] = waring_info
-            else
-              flash = {:warning => waring_info}
-            end
-          end
-        end
-      else
-        flash={:success => "请勾选课程"}
-      end
+    if course_conflict?(get_student_course(), @course)
+      flash={:warning => "课程冲突"}
     else
-      flash={:warning => "不在选课时间！"}
+      fails_course = []
+      success_course = []
+      @course.each do |course|
+        if course.grades.length < course.limit_num and Grade.create(:user_id => current_user.id, :course_id => course.id)
+          success_course << course.name
+        else
+          fails_course << course.name
+        end
+      end
+      if success_course.length !=0
+        flash = {:success => ("成功选择课程:  " + success_course.join(','))}
+      end
+      if fails_course.length !=0
+        waring_info = fails_course.join(',') +'  人数已满'
+        if flash != nil
+          flash[:warning] = waring_info
+        else
+          flash = {:warning => waring_info}
+        end
+      end
     end
-    redirect_to courses_path, flash: flash
-=end   
-    current_user.courses<<@course
-    flash={:suceess => "成功选择课程: #{@course.name}"}
     redirect_to courses_path, flash: flash
   end
 
