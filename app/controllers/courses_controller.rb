@@ -111,6 +111,8 @@ class CoursesController < ApplicationController
       course = @course
       if (course.limit_num.nil? or course.grades.length < course.limit_num) and Grade.create(:user_id => current_user.id, :course_id => course.id)
         success_course << course.name
+        course.student_num += 1
+        course.update_attributes(student_num: course.student_num)
       else
         fails_course << course.name
       end
@@ -134,6 +136,8 @@ class CoursesController < ApplicationController
     @course=Course.find_by_id(params[:id])
     current_user.courses.delete(@course)
     flash={:success => "成功退选课程: #{@course.name}"}
+    @course.student_num -= 1
+    @course.update_attributes(student_num: @course.student_num)
     redirect_to courses_path, flash: flash
   end
 

@@ -40,7 +40,7 @@ end
 
 
 User.create(
-    name: "彭兆卿",
+    name: "管理员",
     email: "admin@test.com",
     num: "201628008629001",
     major: "计算机软件与理论",
@@ -162,7 +162,12 @@ end
 
   course_array=(1..34).to_a.sort { rand() - 0.5 }[1..rand(4..8)]
   course_array.each do |indexes|
-    student.courses<<Course.find(indexes)
+    course = Course.find(indexes)
+    if !course.nil?
+      student.courses << course
+      course.student_num += 1
+      course.update_attributes(student_num: course.student_num)
+    end
   end
 
 end
