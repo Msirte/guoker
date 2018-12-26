@@ -27,6 +27,7 @@ gem 'rails-i18n'
 gem 'spreadsheet'
 
 
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'simplecov', :require => false, :group => :test

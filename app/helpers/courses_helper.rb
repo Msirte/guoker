@@ -63,6 +63,23 @@ module CoursesHelper
     course_time
   end
   
+  def get_course_table_select(cur)
+    course_time = Array.new(11) { Array.new(7, {'name' => '', 'id' => ''}) }
+    if cur
+      cur_time = String(cur.course_time)
+      end_j = cur_time.index('(')
+      j = week_data_to_num(cur_time[0...end_j])
+      t = cur_time[end_j + 1...cur_time.index(')')].split("-")
+      for i in (t[0].to_i..t[1].to_i).each
+        course_time[(i-1)*7/7][j-1] = {
+          'name' => cur.name,
+          'id' => cur.id
+        }
+      end
+    end
+    course_time
+  end
+  
   def get_current_curriculum_table(courses,user)
     course_time = Array.new(11) {Array.new(7) {Array.new(3, '')}}
     courses.each do |cur|
@@ -93,7 +110,7 @@ module CoursesHelper
   
   def course_conflict?(current_courses, to_select_courses)
     current_course_table = get_course_table(current_courses)
-    to_choose_table = get_course_table(to_select_courses)
+    to_choose_table = get_course_table_select(to_select_courses)
     for i in (0...current_course_table.length)
       for j in (0...current_course_table[i].length)
         if current_course_table[i][j]['id'] != '' and to_choose_table[i][j]['id'] != ''
