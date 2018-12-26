@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-offset-3 col-sm-6" style="text-align:center;">
+      <div class="panel panel-primary filterable table_border">
+        <div class="panel-heading table_new">
+          <h3 class="panel-title">
+            <% @coursetmp=current_user.teaching_courses if teacher_logged_in? %>
+            《<%= @course.name %>》课程大纲
+          </h3>
+        </div>
+        </br>
+        <div id="button-edit">
+          <!--显示评论-->
+          <div class="panel-body">
+            <div class="table-responsive">
+              <%= @course.outline %>
+            </div>
+          </div>
+          <!--按钮-->
+          <% if teacher_logged_in? %>
+              <% @coursetmp.each do |coursetmp| %>
+                  <% if @course == coursetmp %>
+
+                      <a><%= link_to "点击修改课程大纲", edit_outline_course_url(@course), class: 'btn btn-xs btn-info btn_new_cancel' %></a>
+                  <% end %>
+              <% end %>
+          <% end %>
+          <div class="panel-body">
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

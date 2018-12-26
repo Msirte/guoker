@@ -7,6 +7,7 @@
       <th>课时/学分</th>
       <th>限选</th>
       <th>已选</th>
+      <th>上课时间</th>
       <th>课程属性</th>
       <th>授课方式</th>
       <th>考试方式</th>
@@ -18,21 +19,22 @@
     <% @course.each do |course| %>
       <tr>
         <td><%= course.course_code %></td>
-        <td><%= course.name %></td>
+        <td><%= link_to course.name, course_outline_course_url(course) %></td>
         <td><%= course.credit %></td>
         <td><%= course.limit_num %></td>
         <td><%= course.student_num %></td>
+        <td><%= course.course_time %></td>
         <td><%= course.course_type %></td>
         <td><%= course.teaching_type %></td>
         <td><%= course.exam_type %></td>
         <td><%= course.teacher.name %></td>
-        <td><%= link_to "加入课程", select_course_path(course), class: 'btn-sm btn-info' %></td>
+        <td><%= link_to "选课", select_course_path(course), class: 'btn-sm btn-info' %></td>
       </tr>
     <% end %>
     </tbody>
   </table>
 </div>
 
-<% if logged_in? %>
+<% if student_logged_in? %>
     <%= render 'courses/credits_statistics' %>
 <% end %>

@@ -22,6 +22,8 @@
               <th>课程编号</th>
               <th>课程名称</th>
               <th>课时/学分</th>
+              <th>上课时间</th>
+              <th>周次</th>
               <th>考试方式</th>
               <th>主讲教师</th>
             </tr>
@@ -31,8 +33,10 @@
                 <tr>
 
                   <td><%= course.course_code %></td>
-                  <td><%= course.name %></td>
+                  <td><%= link_to course.name, course_outline_course_url(course) %></td>
                   <td><%= course.credit %></td>
+                  <td><%= course.course_time %></td>
+                  <td><%= course.course_week %></td>
                   <td><%= course.exam_type %></td>
                   <td><%= course.teacher&.name %></td>
 
@@ -62,6 +66,6 @@
     </div>
   </div>
 </div>
-<% if logged_in? %>
+<% if student_logged_in? %>
     <%= render 'courses/credits_statistics' %>
 <% end %>
