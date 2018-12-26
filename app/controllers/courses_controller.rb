@@ -107,13 +107,13 @@ class CoursesController < ApplicationController
     else
       fails_course = []
       success_course = []
-      @course.each do |course|
-        if course.grades.length < course.limit_num and Grade.create(:user_id => current_user.id, :course_id => course.id)
-          success_course << course.name
-        else
-          fails_course << course.name
-        end
+      course = @course
+      if course.grades.length < course.limit_num and Grade.create(:user_id => current_user.id, :course_id => course.id)
+        success_course << course.name
+      else
+        fails_course << course.name
       end
+
       if success_course.length !=0
         flash = {:success => ("成功选择课程:  " + success_course.join(','))}
       end
