@@ -79,4 +79,31 @@ module CoursesHelper
     end
     course_time
   end
+#-----------------------for course conflict----------------------#
+  def get_student_course()
+    course = []
+    current_user.grades.each do |x|
+      course << x.course
+    end
+    course
+  end
+
+  
+
+  
+  def course_conflict?(current_courses, to_select_courses)
+    current_course_table = get_course_table(current_courses)
+    to_choose_table = get_course_table(to_select_courses)
+    for i in (0...current_course_table.length)
+      for j in (0...current_course_table[i].length)
+        if current_course_table[i][j]['id'] != '' and to_choose_table[i][j]['id'] != ''
+          return true
+        end
+      end
+    end
+    false
+  end
+  
+#--------------------------end----------------------------#
+  
 end
