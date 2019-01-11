@@ -104,7 +104,11 @@ class CoursesController < ApplicationController
     @course=Course.find_by_id(params[:id])
 
     if course_conflict?(get_student_course(), @course)
-      flash={:warning => "课程冲突"}
+      if course_name_conflict?(get_student_course(), @course)
+        flash={:warning => "您已选过此课"}
+      else
+        flash={:warning => "课程时间冲突"}
+      end
     else
       fails_course = []
       success_course = []
