@@ -16,7 +16,7 @@
     </thead>
     <tbody>
 
-    <% @course.each do |course| %>
+    <% @course_list.each do |course| %>
       <tr>
         <td><%= course.course_code %></td>
         <td><%= link_to course.name, course_outline_course_url(course) %></td>

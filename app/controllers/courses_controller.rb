@@ -84,7 +84,7 @@ class CoursesController < ApplicationController
       @course = Course.all.order('created_at DESC')
     end
     search_record
-
+    @course_list = Course.all-current_user.courses
     @course_to_choose = @course
     @course_time_table = get_course_table(@course_to_choose)
     @course_time = get_course_info(@course_to_choose, 'course_time')
