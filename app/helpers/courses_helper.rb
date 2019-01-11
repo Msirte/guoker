@@ -44,14 +44,14 @@ module CoursesHelper
     param[week_data] + 1
   end
 
-  def get_course_table(courses)
+  def get_course_table(courses) #键一个11*7的表，记录每个表格中上哪门课
     course_time = Array.new(11) { Array.new(7, {'name' => '', 'id' => ''}) }
     if courses
       courses.each do |cur|
-        cur_time = String(cur.course_time)
+        cur_time = String(cur.course_time) #课程时间，周几
         end_j = cur_time.index('(')
-        j = week_data_to_num(cur_time[0...end_j])
-        t = cur_time[end_j + 1...cur_time.index(')')].split("-")
+        j = week_data_to_num(cur_time[0...end_j]) #将周数转换为数字
+        t = cur_time[end_j + 1...cur_time.index(')')].split("-") #列出第几节课
         for i in (t[0].to_i..t[1].to_i).each
           course_time[(i-1)*7/7][j-1] = {
             'name' => cur.name,
@@ -121,6 +121,16 @@ module CoursesHelper
     false
   end
   
+  def course_name_conflict?(current_courses, to_select_course)
+    if current_courses
+      current_courses.each do |cur|
+        if cur.name == to_select_course.name
+          return true
+        end
+      end
+    end
+    false
+  end
 #--------------------------end----------------------------#
   
 end
